@@ -97,6 +97,11 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
             object: nil)
         center.addObserver(
             self,
+            selector: #selector(onCloseOtherTabs),
+            name: .ghosttyCloseOtherTabs,
+            object: nil)
+        center.addObserver(
+            self,
             selector: #selector(onResetWindowSize),
             name: .ghosttyResetWindowSize,
             object: nil
@@ -1023,6 +1028,10 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
         }
     }
 
+    @IBAction func closeOtherTabs(_ sender: Any?) {
+    }
+
+
     @IBAction func returnToDefaultSize(_ sender: Any?) {
         guard let defaultSize else { return }
         window?.setFrame(defaultSize, display: true)
@@ -1204,6 +1213,12 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
         guard let target = notification.object as? Ghostty.SurfaceView else { return }
         guard surfaceTree.contains(target) else { return }
         closeTab(self)
+    }
+
+    @objc private func onCloseOtherTabs(notification: SwiftUI.Notification) {
+        guard let target = notification.object as? Ghostty.SurfaceView else { return }
+        guard surfaceTree.contains(target) else { return }
+        closeOtherTabs(self)
     }
 
     @objc private func onCloseWindow(notification: SwiftUI.Notification) {
