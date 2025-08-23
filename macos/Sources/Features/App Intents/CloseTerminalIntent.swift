@@ -12,8 +12,8 @@ struct CloseTerminalIntent: AppIntent {
     )
     var terminal: TerminalEntity
 
-    @available(macOS 26.0, *)
-    static var supportedModes: IntentModes = .background
+    // @available(macOS 26.0, *)
+    // static var supportedModes: IntentModes = .background
 
     @MainActor
     func perform() async throws -> some IntentResult {
