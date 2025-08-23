@@ -21,6 +21,7 @@
                 <outlet property="menuClose" destination="DVo-aG-piG" id="R3t-0C-aSU"/>
                 <outlet property="menuCloseAllWindows" destination="yKr-Vi-Yqw" id="Zet-Ir-zbm"/>
                 <outlet property="menuCloseTab" destination="Obb-Mk-j8J" id="Gda-L0-gdz"/>
+                <outlet property="menuCloseOtherTabs" destination="Obb-Mk-XXX" id="Gda-L0-XXX"/>
                 <outlet property="menuCloseWindow" destination="W5w-UZ-crk" id="6ff-BT-ENV"/>
                 <outlet property="menuCommandPalette" destination="et6-de-Mh7" id="53t-cu-dm5"/>
                 <outlet property="menuCopy" destination="Jqf-pv-Zcu" id="bKd-1C-oy9"/>
@@ -186,6 +187,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="closeTab:" target="-1" id="UBb-Bd-nkj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Close Other Tabs" id="Obb-Mk-XXX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="closeOtherTabs:" target="-1" id="UBb-Bd-XXX"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Close Window" id="W5w-UZ-crk">
