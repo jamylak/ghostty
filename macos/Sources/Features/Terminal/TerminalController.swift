@@ -1029,6 +1029,29 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
     }
 
     @IBAction func closeOtherTabs(_ sender: Any?) {
+        guard let window = window else { return }
+        guard let tabGroup = window.tabGroup else { return }
+
+        // Iterate through all tabs except the current one
+        // TODO: Change to have one single confirm if confirm is on
+        for otherWindow in tabGroup.windows where otherWindow != window {
+            if let controller = otherWindow.windowController as? TerminalController {
+                // If any surfaceTree requires confirmation, prompt first
+                if controller.surfaceTree.contains(where: { $0.needsConfirmQuit }) {
+                    controller.confirmClose(
+                        messageText: "Close Tab?",
+                        informativeText: "A terminal tab has a running process. If you close it, the process will be killed."
+                    ) {
+                        controller.closeTabImmediately()
+                    }
+                } else {
+                    controller.closeTabImmediately()
+                }
+            } else {
+                // Fallback: just close the window
+                otherWindow.performClose(sender)
+            }
+        }
     }
 
 
