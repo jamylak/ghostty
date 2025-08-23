@@ -734,6 +734,11 @@ pub fn close(self: *Surface) void {
     self.rt_surface.close(self.needsConfirmQuit());
 }
 
+pub fn close_other_tabs(_: *Surface) void {
+    // Print hello world for now
+    log.debug("close_other_tabs called, but not implemented yet", .{});
+}
+
 /// Forces the surface to render. This is useful for when the surface
 /// is in the middle of animation (such as a resize, etc.) or when
 /// the render timer is managed manually by the apprt.
@@ -4839,6 +4844,8 @@ pub fn performBindingAction(self: *Surface, action: input.Binding.Action) !bool 
             .show_on_screen_keyboard,
             {},
         ),
+
+        .close_other_tabs => self.close_other_tabs(),
 
         .select_all => {
             const sel = self.io.terminal.screen.selectAll();

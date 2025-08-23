@@ -532,6 +532,10 @@ pub const Action = union(enum) {
     /// untested.
     show_on_screen_keyboard,
 
+    /// Close other tabs
+    /// Only on Mac
+    close_other_tabs,
+
     /// Open the configuration file in the default OS editor.
     ///
     /// If your default OS editor isn't configured then this will fail.
@@ -1060,6 +1064,7 @@ pub const Action = union(enum) {
             .toggle_secure_input,
             .toggle_command_palette,
             .show_on_screen_keyboard,
+            .close_other_tabs,
             .reset_window_size,
             .crash,
             => .surface,

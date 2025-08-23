@@ -86,9 +86,6 @@ pub const Action = union(Key) {
     /// Closes the tab belonging to the currently focused split.
     close_tab,
 
-    /// Closes all other tabs
-    // close_other_tab,
-
     /// Create a new split. The value determines the location of the split
     /// relative to the target.
     new_split: SplitDirection,
@@ -297,6 +294,9 @@ pub const Action = union(Key) {
     /// Show the on-screen keyboard.
     show_on_screen_keyboard,
 
+    /// Closes all other tabs
+    close_other_tabs,
+
     /// Sync with: ghostty_action_tag_e
     pub const Key = enum(c_int) {
         quit,
@@ -352,6 +352,7 @@ pub const Action = union(Key) {
         show_child_exited,
         progress_report,
         show_on_screen_keyboard,
+        close_other_tabs,
     };
 
     /// Sync with: ghostty_action_u

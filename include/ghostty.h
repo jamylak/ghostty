@@ -758,6 +758,7 @@ typedef enum {
   GHOSTTY_ACTION_SHOW_CHILD_EXITED,
   GHOSTTY_ACTION_PROGRESS_REPORT,
   GHOSTTY_ACTION_SHOW_ON_SCREEN_KEYBOARD,
+  GHOSTTY_ACTION_CLOSE_OTHER_TABS,
 } ghostty_action_tag_e;
 
 typedef union {
@@ -831,7 +832,7 @@ typedef enum {
 } ghostty_ipc_target_tag_e;
 
 typedef union {
-  char *klass;
+  char* klass;
 } ghostty_ipc_target_u;
 
 typedef struct {
@@ -842,7 +843,7 @@ typedef struct {
 // apprt.ipc.Action.NewWindow
 typedef struct {
   // This should be a null terminated list of strings.
-  const char **arguments;
+  const char** arguments;
 } ghostty_ipc_action_new_window_s;
 
 typedef union {
