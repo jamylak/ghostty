@@ -5906,6 +5906,11 @@ pub const Keybinds = struct {
             );
             try self.set.put(
                 alloc,
+                .{ .key = .{ .unicode = 'o' }, .mods = .{ .super = true, .alt = true } },
+                .{ .close_other_tabs = {} },
+            );
+            try self.set.put(
+                alloc,
                 .{ .key = .{ .unicode = 'w' }, .mods = .{ .super = true, .shift = true } },
                 .{ .close_window = {} },
             );

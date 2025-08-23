@@ -294,6 +294,9 @@ pub const Action = union(Key) {
     /// Show the on-screen keyboard.
     show_on_screen_keyboard,
 
+    /// Closes all other tabs
+    close_other_tabs,
+
     /// Sync with: ghostty_action_tag_e
     pub const Key = enum(c_int) {
         quit,
@@ -349,6 +352,7 @@ pub const Action = union(Key) {
         show_child_exited,
         progress_report,
         show_on_screen_keyboard,
+        close_other_tabs,
     };
 
     /// Sync with: ghostty_action_u

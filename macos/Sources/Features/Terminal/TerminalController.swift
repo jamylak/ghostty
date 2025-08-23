@@ -97,6 +97,11 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
             object: nil)
         center.addObserver(
             self,
+            selector: #selector(onCloseOtherTabs),
+            name: .ghosttyCloseOtherTabs,
+            object: nil)
+        center.addObserver(
+            self,
             selector: #selector(onResetWindowSize),
             name: .ghosttyResetWindowSize,
             object: nil
@@ -1023,6 +1028,32 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
         }
     }
 
+    @IBAction func closeOtherTabs(_ sender: Any?) {
+        guard let window = window else { return }
+        guard let tabGroup = window.tabGroup else { return }
+
+        // Iterate through all tabs except the current one
+        for otherWindow in tabGroup.windows where otherWindow != window {
+            if let controller = otherWindow.windowController as? TerminalController {
+                // If any surfaceTree requires confirmation, prompt first
+                if controller.surfaceTree.contains(where: { $0.needsConfirmQuit }) {
+                    controller.confirmClose(
+                        messageText: "Close Tab?",
+                        informativeText: "A terminal tab has a running process. If you close it, the process will be killed."
+                    ) {
+                        controller.closeTabImmediately()
+                    }
+                } else {
+                    controller.closeTabImmediately()
+                }
+            } else {
+                // Fallback: just close the window
+                otherWindow.performClose(sender)
+            }
+        }
+    }
+
+
     @IBAction func returnToDefaultSize(_ sender: Any?) {
         guard let defaultSize else { return }
         window?.setFrame(defaultSize, display: true)
@@ -1204,6 +1235,12 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
         guard let target = notification.object as? Ghostty.SurfaceView else { return }
         guard surfaceTree.contains(target) else { return }
         closeTab(self)
+    }
+
+    @objc private func onCloseOtherTabs(notification: SwiftUI.Notification) {
+        guard let target = notification.object as? Ghostty.SurfaceView else { return }
+        guard surfaceTree.contains(target) else { return }
+        closeOtherTabs(self)
     }
 
     @objc private func onCloseWindow(notification: SwiftUI.Notification) {
