@@ -1033,7 +1033,6 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
         guard let tabGroup = window.tabGroup else { return }
 
         // Iterate through all tabs except the current one
-        // TODO: Change to have one single confirm if confirm is on
         for otherWindow in tabGroup.windows where otherWindow != window {
             if let controller = otherWindow.windowController as? TerminalController {
                 // If any surfaceTree requires confirmation, prompt first
