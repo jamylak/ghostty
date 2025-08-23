@@ -19,8 +19,8 @@ struct CommandPaletteIntent: AppIntent {
     )
     var command: CommandEntity
 
-    @available(macOS 26.0, *)
-    static var supportedModes: IntentModes = .background
+    // @available(macOS 26.0, *)
+    // static var supportedModes: IntentModes = .background
 
     @MainActor
     func perform() async throws -> some IntentResult & ReturnsValue<Bool> {
