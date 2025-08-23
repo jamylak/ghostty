@@ -86,6 +86,9 @@ pub const Action = union(Key) {
     /// Closes the tab belonging to the currently focused split.
     close_tab,
 
+    /// Closes all other tabs
+    // close_other_tab,
+
     /// Create a new split. The value determines the location of the split
     /// relative to the target.
     new_split: SplitDirection,
