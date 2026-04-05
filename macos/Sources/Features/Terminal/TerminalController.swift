@@ -480,8 +480,7 @@ class TerminalController: BaseTerminalController, TabGroupCloseCoordinator.Contr
         // consistent which causes our tab labeling to be off when the "+" button
         // is used in the tab bar. This fixes that. If we can find a more robust
         // solution we should do that.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak controller] in
-            guard let controller else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             controller.relabelTabs()
         }
 
